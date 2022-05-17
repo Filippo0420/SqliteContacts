@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initListView() {
         fillListViewData();
-        initListViewOnItemClick();
+        //initListViewOnItemClick();
     }
 
     private void fillListViewData() {
@@ -84,9 +84,11 @@ public class MainActivity extends AppCompatActivity {
         if(todoCursor != null && todoCursor.moveToFirst()) {
             do {
                 long id = todoCursor.getLong(ContactsDbAdapter.ID_COLUMN);
-                String description = todoCursor.getString(ContactsDbAdapter.DESCRIPTION_COLUMN);
-                boolean completed = todoCursor.getInt(ContactsDbAdapter.COMPLETED_COLUMN) > 0 ? true : false;
-                tasks.add(new Contacts(id, description, completed));
+                String name = todoCursor.getString(ContactsDbAdapter.NAME_COLUMN);
+                String surname = todoCursor.getString(ContactsDbAdapter.NAME_COLUMN);
+                String phone = todoCursor.getString(ContactsDbAdapter.NAME_COLUMN);
+                String mail = todoCursor.getString(ContactsDbAdapter.NAME_COLUMN);
+                tasks.add(new Contacts(id, name, surname, phone, mail));
             } while(todoCursor.moveToNext());
         }
     }
@@ -97,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
             todoDbAdapter.close();
         super.onDestroy();
     }
-
+/*
     private void initListViewOnItemClick() {
         lvTodos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -120,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
         updateTaskList();
         listAdapter.notifyDataSetChanged();
     }
-
+*/
     private void initButtonsOnClickListeners() {
         View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
@@ -180,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
         if(taskDescription.equals("")){
             etNewTask.setError("Your task description couldn't be empty string.");
         } else {
-            todoDbAdapter.insertContacts(taskDescription);
+            todoDbAdapter.insertContacts();
             etNewTask.setText("");
             hideKeyboard();
             showOnlyControlPanel();

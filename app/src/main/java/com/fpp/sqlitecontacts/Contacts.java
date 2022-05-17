@@ -2,13 +2,16 @@ package com.fpp.sqlitecontacts;
 
 public class Contacts {
     private long id;
-    private String description;
-    private boolean completed;
+    private String name;
+    private String surname;
+    private String phone;
+    private String mail;
 
-    public Contacts(long id, String description, boolean completed) {
+    public Contacts(long id, String name, String surname, String phone, String mail) {
         this.id = id;
-        this.description = description;
-        this.completed = completed;
+        this.name = name;
+        this.surname = surname;
+        this.mail = mail;
     }
 
     public long getId() {
@@ -20,13 +23,14 @@ public class Contacts {
     }
 
     public String getDescription() {
-        return description;
+        return mail;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDescription(String mail) {
+        this.mail = mail;
     }
 
+    /*
     public boolean isCompleted() {
         return completed;
     }
@@ -34,4 +38,6 @@ public class Contacts {
     public void setCompleted(boolean completed) {
         this.completed = completed;
     }
+
+     */
 }

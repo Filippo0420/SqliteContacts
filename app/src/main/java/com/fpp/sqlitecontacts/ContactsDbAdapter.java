@@ -18,18 +18,26 @@ public class ContactsDbAdapter {
     public static final String KEY_ID = "_id";
     public static final String ID_OPTIONS = "INTEGER PRIMARY KEY AUTOINCREMENT";
     public static final int ID_COLUMN = 0;
-    public static final String KEY_DESCRIPTION = "description";
-    public static final String DESCRIPTION_OPTIONS = "TEXT NOT NULL";
-    public static final int DESCRIPTION_COLUMN = 1;
-    public static final String KEY_COMPLETED = "completed";
-    public static final String COMPLETED_OPTIONS = "INTEGER DEFAULT 0";
-    public static final int COMPLETED_COLUMN = 2;
+    public static final String KEY_NAME = "name";
+    public static final String NAME_OPTIONS = "TEXT NOT NULL";
+    public static final int NAME_COLUMN = 1;
+    public static final String KEY_SURNAME = "surname";
+    public static final String SURNAME_OPTIONS = "TEXT NOT NULL";
+    public static final int SURNAME_COLUMN = 2;
+    public static final String KEY_PHONE = "phone";
+    public static final String PHONE_OPTIONS = "TEXT NOT NULL";
+    public static final int PHONE_COLUMN = 3;
+    public static final String KEY_MAIL = "mail";
+    public static final String MAIL_OPTIONS = "TEXT NOT NULL";
+    public static final int MAIL_COLUMN = 4;
 
     private static final String DB_CREATE_CONTACTS_TABLE =
             "CREATE TABLE " + DB_CONTACTS_TABLE + "( " +
                     KEY_ID + " " + ID_OPTIONS + ", " +
-                    KEY_DESCRIPTION + " " + DESCRIPTION_OPTIONS + ", " +
-                    KEY_COMPLETED + " " + COMPLETED_OPTIONS +
+                    KEY_NAME + " " + NAME_OPTIONS + ", " +
+                    KEY_SURNAME + " " + SURNAME_OPTIONS + ", " +
+                    KEY_PHONE + " " + PHONE_OPTIONS + ", " +
+                    KEY_MAIL + " " + MAIL_OPTIONS +
                     ");";
     private static final String DROP_CONTACTS_TABLE =
             "DROP TABLE IF EXISTS " + DB_CONTACTS_TABLE;
@@ -82,25 +90,28 @@ public class ContactsDbAdapter {
         dbHelper.close();
     }
 
-    public long insertContacts(String description) {
+    public long insertContacts(String name, String surname, String phone, String mail) {
         ContentValues newContactsValues = new ContentValues();
-        newContactsValues.put(KEY_DESCRIPTION, description);
+        newContactsValues.put(KEY_NAME, name);
         return db.insert(DB_CONTACTS_TABLE, null, newContactsValues);
     }
 
     public boolean updateContacts(Contacts task) {
         long id = task.getId();
-        String description = task.getDescription();
-        boolean completed = task.isCompleted();
-        return updateContacts(id, description, completed);
+        String name = task.getName();
+        String surname = task.getSurname();
+        String phone = task.getPhone();
+        String mail = task.getMail();
+        return updateContacts(id, name, surname, phone, mail);
     }
 
-    public boolean updateContacts(long id, String description, boolean completed) {
+    public boolean updateContacts(long id, String name, String surname, String phone, String mail) {
         String where = KEY_ID + "=" + id;
-        int completedTask = completed ? 1 : 0;
         ContentValues updateContactsValues = new ContentValues();
-        updateContactsValues.put(KEY_DESCRIPTION, description);
-        updateContactsValues.put(KEY_COMPLETED, completedTask);
+        updateContactsValues.put(KEY_NAME, name);
+        updateContactsValues.put(KEY_SURNAME, surname);
+        updateContactsValues.put(KEY_PHONE, phone);
+        updateContactsValues.put(KEY_MAIL, mail);
         return db.update(DB_CONTACTS_TABLE, updateContactsValues, where, null) > 0;
     }
 
@@ -110,19 +121,21 @@ public class ContactsDbAdapter {
     }
 
     public Cursor getAllContacts() {
-        String[] columns = {KEY_ID, KEY_DESCRIPTION, KEY_COMPLETED};
+        String[] columns = {KEY_ID, KEY_NAME, KEY_SURNAME, KEY_PHONE, KEY_MAIL};
         return db.query(DB_CONTACTS_TABLE, columns, null, null, null, null, null);
     }
 
     public Contacts getContacts(long id) {
-        String[] columns = {KEY_ID, KEY_DESCRIPTION, KEY_COMPLETED};
+        String[] columns = {KEY_ID, KEY_NAME, KEY_SURNAME, KEY_PHONE, KEY_MAIL};
         String where = KEY_ID + "=" + id;
         Cursor cursor = db.query(DB_CONTACTS_TABLE, columns, where, null, null, null, null);
         Contacts task = null;
         if(cursor != null && cursor.moveToFirst()) {
-            String description = cursor.getString(DESCRIPTION_COLUMN);
-            boolean completed = cursor.getInt(COMPLETED_COLUMN) > 0 ? true : false;
-            task = new Contacts(id, description, completed);
+            String name = cursor.getString(NAME_COLUMN);
+            String surname = cursor.getString(SURNAME_COLUMN);
+            String phone = cursor.getString(PHONE_COLUMN);
+            String mail = cursor.getString(MAIL_COLUMN);
+            task = new Contacts(id, name, surname, phone, mail);
         }
         return task;
     }

@@ -31,14 +31,14 @@ public class ContactsAdapter extends ArrayAdapter<Contacts> {
             LayoutInflater layoutInflater = context.getLayoutInflater();
             rowView = layoutInflater.inflate(R.layout.contacts_list_item, null, true);
             viewHolder = new ViewHolder();
-            viewHolder.tvContactsDescription = (TextView) rowView.findViewById(R.id.tvContactsDescription);
+            viewHolder.tvContactsDescription = rowView.findViewById(R.id.tvContactsDescription);
             rowView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) rowView.getTag();
         }
         Contacts task = contacts.get(position);
         viewHolder.tvContactsDescription.setText(task.getDescription());
-        if(task.isCompleted()) {
+        /*if(task.isCompleted()) {
             viewHolder.tvContactsDescription
                     .setPaintFlags(viewHolder.tvContactsDescription.getPaintFlags() |
                             Paint.STRIKE_THRU_TEXT_FLAG);
@@ -46,7 +46,7 @@ public class ContactsAdapter extends ArrayAdapter<Contacts> {
             viewHolder.tvContactsDescription
                     .setPaintFlags(viewHolder.tvContactsDescription.getPaintFlags() &
                             ~Paint.STRIKE_THRU_TEXT_FLAG);
-        }
+        }*/
         return rowView;
     }
 }
