@@ -93,6 +93,9 @@ public class ContactsDbAdapter {
     public long insertContacts(String name, String surname, String phone, String mail) {
         ContentValues newContactsValues = new ContentValues();
         newContactsValues.put(KEY_NAME, name);
+        newContactsValues.put(KEY_SURNAME, surname);
+        newContactsValues.put(KEY_PHONE, phone);
+        newContactsValues.put(KEY_MAIL, mail);
         return db.insert(DB_CONTACTS_TABLE, null, newContactsValues);
     }
 

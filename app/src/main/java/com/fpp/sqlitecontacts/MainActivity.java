@@ -91,9 +91,9 @@ public class MainActivity extends AppCompatActivity {
             do {
                 long id = todoCursor.getLong(ContactsDbAdapter.ID_COLUMN);
                 String name = todoCursor.getString(ContactsDbAdapter.NAME_COLUMN);
-                String surname = todoCursor.getString(ContactsDbAdapter.NAME_COLUMN);
-                String phone = todoCursor.getString(ContactsDbAdapter.NAME_COLUMN);
-                String mail = todoCursor.getString(ContactsDbAdapter.NAME_COLUMN);
+                String surname = todoCursor.getString(ContactsDbAdapter.SURNAME_COLUMN);
+                String phone = todoCursor.getString(ContactsDbAdapter.PHONE_COLUMN);
+                String mail = todoCursor.getString(ContactsDbAdapter.MAIL_COLUMN);
                 tasks.add(new Contacts(id, name, surname, phone, mail));
             } while(todoCursor.moveToNext());
         }
