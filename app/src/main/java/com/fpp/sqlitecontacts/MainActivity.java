@@ -22,7 +22,10 @@ public class MainActivity extends AppCompatActivity {
     private Button btnClearCompleted;
     private Button btnSave;
     private Button btnCancel;
-    private EditText etNewTask;
+    private EditText etNewName;
+    private EditText etNewSurname;
+    private EditText etNewPhone;
+    private EditText etNewMail;
     private ListView lvTodos;
     private LinearLayout llControlButtons;
     private LinearLayout llNewTaskButtons;
@@ -42,14 +45,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initUiElements() {
-        btnAddNew = (Button) findViewById(R.id.btnAddNew);
-        btnClearCompleted = (Button) findViewById(R.id.btnClearCompleted);
-        btnSave = (Button) findViewById(R.id.btnSave);
-        btnCancel = (Button) findViewById(R.id.btnCancel);
-        etNewTask = (EditText) findViewById(R.id.etNewTask);
-        lvTodos = (ListView) findViewById(R.id.lvTodos);
-        llControlButtons = (LinearLayout) findViewById(R.id.llControlButtons);
-        llNewTaskButtons = (LinearLayout) findViewById(R.id.llNewTaskButtons);
+        btnAddNew = findViewById(R.id.btnAddNew);
+        btnClearCompleted = findViewById(R.id.btnClearCompleted);
+        btnSave = findViewById(R.id.btnSave);
+        btnCancel = findViewById(R.id.btnCancel);
+        etNewName = findViewById(R.id.etNewName);
+        etNewSurname = findViewById(R.id.etNewSurname);
+        etNewPhone = findViewById(R.id.etNewPhone);
+        etNewMail = findViewById(R.id.etNewMail);
+        lvTodos = findViewById(R.id.lvTodos);
+        llControlButtons = findViewById(R.id.llControlButtons);
+        llNewTaskButtons = findViewById(R.id.llNewTaskButtons);
     }
 
     private void initListView() {
@@ -99,18 +105,18 @@ public class MainActivity extends AppCompatActivity {
             todoDbAdapter.close();
         super.onDestroy();
     }
-/*
+
     private void initListViewOnItemClick() {
         lvTodos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int position,
                                     long id) {
                 Contacts task = tasks.get(position);
-                if(task.isCompleted()){
+                /*if(task.isCompleted()){
                     todoDbAdapter.updateContacts(task.getId(), task.getDescription(), false);
                 } else {
                     todoDbAdapter.updateContacts(task.getId(), task.getDescription(), true);
-                }
+                }*/
                 updateListViewData();
             }
         });
@@ -122,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
         updateTaskList();
         listAdapter.notifyDataSetChanged();
     }
-*/
+
     private void initButtonsOnClickListeners() {
         View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
@@ -138,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
                         cancelNewTask();
                         break;
                     case R.id.btnClearCompleted:
-                        clearCompletedTasks();
+                        //clearCompletedTasks();
                         break;
                     default:
                         break;
@@ -154,13 +160,19 @@ public class MainActivity extends AppCompatActivity {
     private void showOnlyNewTaskPanel() {
         setVisibilityOf(llControlButtons, false);
         setVisibilityOf(llNewTaskButtons, true);
-        setVisibilityOf(etNewTask, true);
+        setVisibilityOf(etNewName, true);
+        setVisibilityOf(etNewSurname, true);
+        setVisibilityOf(etNewPhone, true);
+        setVisibilityOf(etNewMail, true);
     }
 
     private void showOnlyControlPanel() {
         setVisibilityOf(llControlButtons, true);
         setVisibilityOf(llNewTaskButtons, false);
-        setVisibilityOf(etNewTask, false);
+        setVisibilityOf(etNewName, false);
+        setVisibilityOf(etNewSurname, false);
+        setVisibilityOf(etNewPhone, false);
+        setVisibilityOf(etNewMail, false);
     }
 
     private void setVisibilityOf(View v, boolean visible) {
@@ -170,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void hideKeyboard() {
         InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(etNewTask.getWindowToken(), 0);
+        imm.hideSoftInputFromWindow(etNewName.getWindowToken(), 0);
     }
 
     private void addNewTask(){
@@ -178,12 +190,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void saveNewTask(){
-        String taskDescription = etNewTask.getText().toString();
-        if(taskDescription.equals("")){
-            etNewTask.setError("Your task description couldn't be empty string.");
+        String taskName = etNewName.getText().toString();
+        String taskSurname = etNewSurname.getText().toString();
+        String taskPhone = etNewPhone.getText().toString();
+        String taskMail = etNewMail.getText().toString();
+        if(taskName.equals("")){
+            etNewName.setError("Your task description couldn't be empty string.");
         } else {
-            todoDbAdapter.insertContacts();
-            etNewTask.setText("");
+            todoDbAdapter.insertContacts(taskName, taskSurname, taskPhone, taskMail);
+            etNewName.setText("");
+            etNewSurname.setText("");
+            etNewPhone.setText("");
+            etNewMail.setText("");
             hideKeyboard();
             showOnlyControlPanel();
         }
@@ -191,10 +209,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void cancelNewTask() {
-        etNewTask.setText("");
+        etNewName.setText("");
+        etNewSurname.setText("");
+        etNewPhone.setText("");
+        etNewMail.setText("");
         showOnlyControlPanel();
     }
-
+/*
     private void clearCompletedTasks(){
         if(todoCursor != null && todoCursor.moveToFirst()) {
             do {
@@ -205,5 +226,5 @@ public class MainActivity extends AppCompatActivity {
             } while (todoCursor.moveToNext());
         }
         updateListViewData();
-    }
+    }*/
 }

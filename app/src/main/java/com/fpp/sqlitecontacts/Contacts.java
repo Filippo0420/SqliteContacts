@@ -22,22 +22,35 @@ public class Contacts {
         this.id = id;
     }
 
-    public String getDescription() {
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getMail() {
         return mail;
     }
 
-    public void setDescription(String mail) {
+    public void setMail(String mail) {
         this.mail = mail;
     }
-
-    /*
-    public boolean isCompleted() {
-        return completed;
-    }
-
-    public void setCompleted(boolean completed) {
-        this.completed = completed;
-    }
-
-     */
 }

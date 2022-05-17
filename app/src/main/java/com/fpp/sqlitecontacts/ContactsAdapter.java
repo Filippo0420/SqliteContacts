@@ -37,7 +37,7 @@ public class ContactsAdapter extends ArrayAdapter<Contacts> {
             viewHolder = (ViewHolder) rowView.getTag();
         }
         Contacts task = contacts.get(position);
-        viewHolder.tvContactsDescription.setText(task.getDescription());
+        viewHolder.tvContactsDescription.setText(task.getName() + " " + task.getSurname() + "\n" + task.getPhone() + "  " + task.getMail());
         /*if(task.isCompleted()) {
             viewHolder.tvContactsDescription
                     .setPaintFlags(viewHolder.tvContactsDescription.getPaintFlags() |

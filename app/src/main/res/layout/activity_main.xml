@@ -15,7 +15,31 @@
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/etNewTask"
+        android:id="@+id/etNewName"
+        android:hint="@string/edittext_hint_new_task"
+        android:visibility="gone">
+        <requestFocus></requestFocus>
+    </EditText>
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etNewSurname"
+        android:hint="@string/edittext_hint_new_task"
+        android:visibility="gone">
+        <requestFocus></requestFocus>
+    </EditText>
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etNewPhone"
+        android:hint="@string/edittext_hint_new_task"
+        android:visibility="gone">
+        <requestFocus></requestFocus>
+    </EditText>
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etNewMail"
         android:hint="@string/edittext_hint_new_task"
         android:visibility="gone">
         <requestFocus></requestFocus>
