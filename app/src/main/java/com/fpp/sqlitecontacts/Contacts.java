@@ -11,6 +11,7 @@ public class Contacts {
         this.id = id;
         this.name = name;
         this.surname = surname;
+        this.phone = phone;
         this.mail = mail;
     }
 
