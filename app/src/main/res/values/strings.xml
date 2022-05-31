@@ -1,8 +1,12 @@
 <resources>
     <string name="app_name">SqliteContacts</string>
-    <string name="button_add">New task</string>
+    <string name="button_add">New Contact</string>
     <string name="button_clear">Clear completed</string>
-    <string name="edittext_hint_new_task">Type here your new contact...</string>
-    <string name="button_save">Save task</string>
+    <string name="name">Type here your new name</string>
+    <string name="surname">Type here your new surname</string>
+    <string name="phone">Type here your new phone number</string>
+    <string name="email">Type here your new mail</string>
+
+    <string name="button_save">Save contact</string>
     <string name="button_cancel">Cancel</string>
 </resources>
